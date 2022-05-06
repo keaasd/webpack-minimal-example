@@ -1,0 +1,5 @@
+npm i
+npm install -g sass
+npm install sass-loader sass webpack --save-dev
+
+npm install -g sass
