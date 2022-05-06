@@ -17,9 +17,20 @@ module.exports = (env, { mode }) => ({
   ],
   module: {
     rules: [
+      // JavaScript
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader'],
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [MiniCssExtractPlugin.loader, 'css-loader', "sass-loader"],
+      },
+      // изображения
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        type: 'asset/resource',
       },
     ],
   },

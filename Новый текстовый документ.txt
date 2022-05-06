@@ -1,5 +1,7 @@
 npm i
+(npm audit fix)
 npm install -g sass
 npm install sass-loader sass webpack --save-dev
 
-npm install -g sass
+
+npm add -D babel-loader @babel/core @babel/preset-env @babel/plugin-proposal-class-properties
