@@ -1,6 +1,6 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, { mode }) => ({
   entry: './src/index.js',
@@ -11,9 +11,15 @@ module.exports = (env, { mode }) => ({
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
-    }),
-    new MiniCssExtractPlugin()
+      title: 'webpack Boilerplate',
+      template: path.resolve(__dirname, './src/template.html'), // шаблон
+      filename: 'index.html', // название выходного файла
+  }),
+    // new HtmlWebpackPlugin({
+    //   template: './src/index.html'
+    // }),
+    new MiniCssExtractPlugin(),
+    // new CleanWebpackPlugin(),
   ],
   module: {
     rules: [
