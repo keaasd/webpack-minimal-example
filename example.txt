@@ -8,7 +8,9 @@ npm install sass-loader sass webpack --save-dev
 npm i -D mini-css-extract-plugin css-loader sass-loader sass postcss postcss-preset-env postcss-loader
 
 npm add -D babel-loader @babel/core @babel/preset-env @babel/plugin-proposal-class-properties
+npm install image-webpack-loader --save-dev
 npm install image-minimizer-webpack-plugin imagemin --save-dev
+npm install imagemin-gifsicle imagemin-jpegtran imagemin-optipng imagemin-svgo --save-dev
 
 (Настройка webpack для работы с React)
 npm i -D @babel/preset-react cross-env react-refresh pmmmwh/react-refresh-webpack-plugin
