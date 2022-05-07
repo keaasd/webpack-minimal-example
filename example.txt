@@ -1,0 +1,14 @@
+npm i
+(npm audit fix)
+npm i -D webpack-dev-server
+(npm add -D html-webpack-plugin)
+npm i -D html-loader html-webpack-plugin
+npm install -g sass
+npm install sass-loader sass webpack --save-dev
+npm i -D mini-css-extract-plugin css-loader sass-loader sass postcss postcss-preset-env postcss-loader
+
+npm add -D babel-loader @babel/core @babel/preset-env @babel/plugin-proposal-class-properties
+npm install image-minimizer-webpack-plugin imagemin --save-dev
+
+(Настройка webpack для работы с React)
+npm i -D @babel/preset-react cross-env react-refresh pmmmwh/react-refresh-webpack-plugin

@@ -1,7 +1,8 @@
 import './styles/style.scss';
-// import mainImage from './images/example.svg';
-// '/dist/151cfcfa1bd74779aadb.png'
-// img.src = mainImage; 
+import image from './images/example.svg';
+
+// document.getElementById('root').innerHTML = `<img src=${image} />`;
+
 console.log('Hello world');
 // создание свойства класса без конструктора
 class Game {
