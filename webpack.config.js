@@ -1,52 +1,67 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-module.exports = (env, { mode }) => ({
+let mode = 'development';
+let target = 'web';
+if (process.env.NODE_ENV === 'production') {
+  mode = 'production';
+  target = 'browserslist';
+}
+
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: '[name].[contenthash].css',
+  }),
+  new HtmlWebpackPlugin({
+    template: './src/index.html',
+  }),
+];
+
+if (process.env.SERVE) {
+  plugins.push(new ReactRefreshWebpackPlugin());
+}
+
+module.exports = {
+  mode,
+  target,
+  plugins,
+  devtool: 'source-map',
   entry: './src/index.js',
-  devtool: mode === 'development' ? 'source-map' : undefined,
   devServer: {
+    static: './dist',
     hot: true,
   },
+
   output: {
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'assets/[hash][ext][query]', // Все ассеты будут
-    // складываться в dist/assets
+    assetModuleFilename: 'assets/[hash][ext][query]',
     clean: true,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/template.html'), // шаблон
-      filename: 'index.html', // название выходного файла
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css', // Формат имени файла
-    }), // Добавляем в список плагинов    
-    // new CleanWebpackPlugin(),
-  ],
-  
+
   module: {
     rules: [
-      
-      // JavaScript
-      { 
-        test: /\.(html)$/, 
-        use: ['html-loader'] 
-      }, // Добавляем загрузчик для html      
+      { test: /\.(html)$/, use: ['html-loader'] },
       {
-        test: /\.js$/,
-        exclude: /node_modules/, // не обрабатываем файлы из node_modules
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true, // Использование кэша для избежания рекомпиляции
-            // при каждом запуске
-          },
-        },
+        test: /\.(s[ac]|c)ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
       {
-        test: /\.jsx?$/, // обновляем регулярное выражение для поддержки jsx
+        test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
+        type: mode === 'production' ? 'asset' : 'asset/resource',
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -55,27 +70,6 @@ module.exports = (env, { mode }) => ({
           },
         },
       },
-      {
-        test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', "sass-loader"],        
-      },
-      // изображения
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
-        type: 'asset/resource',
-        // type: 'javascript/auto'
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
-        type: mode === 'production' ? 'asset' : 'asset/resource', // В продакшен режиме
-        // изображения размером до 8кб будут инлайнится в код
-        // В режиме разработки все изображения будут помещаться в dist/assets
-      },
-      {
-        test: /\.(woff2?|eot|ttf|otf)$/i,
-        type: 'asset/resource',
-      },
-
     ],
   },
-});
+};
