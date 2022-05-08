@@ -29,11 +29,17 @@ module.exports = {
   plugins,
   devtool: 'source-map',
   entry: './src/index.js',
+  // devServer: {
+  //   static: './dist',
+  //   hot: true,
+  // },
   devServer: {
-    static: './dist',
-    hot: true,
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 9000,
   },
-
   output: {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'assets/[hash][ext][query]',
