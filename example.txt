@@ -7,7 +7,8 @@ npm i -D html-loader html-webpack-plugin
 npm install -g sass
 npm install sass-loader sass webpack --save-dev
 npm i -D mini-css-extract-plugin css-loader sass-loader sass postcss postcss-preset-env postcss-loader
-
+(фавиконка)
+npm install --save-dev favicons-webpack-plugin
 npm add -D babel-loader @babel/core @babel/preset-env @babel/plugin-proposal-class-properties
 npm install image-webpack-loader --save-dev
 npm install image-minimizer-webpack-plugin imagemin --save-dev

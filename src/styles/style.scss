@@ -1,24 +1,46 @@
+$bg: rgb(229, 255, 227);
 body {
-  background-color: green;
-  background-color: yellow;
-}
-.b {
-  background-image: url('../images/logo.svg');
-  height: 50px;
-  width: 50px;
-  display: block;
-  
+  background-color: $bg;
 }
 a {
   color: inherit;
   text-decoration: none;
+  display: block;
 }
 button {
   background-color: transparent;
   border: transparent;
-  // background-image: url(./images/example.svg );
 }
 
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
+}
+
+button,
+input {
+  outline: none;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+p {
+  margin-top: 1rem;
+}
 .modal-mb {
   position: fixed;
   top: 0;
@@ -33,7 +55,7 @@ button {
   &__window {
     position: relative;
     background-color: #e7e6e4;
-    padding: 77px 10px 43px;
+    padding: 20px 10px 30px;
     width: 100%;
     text-align: center;
     max-width: 500px;
@@ -60,4 +82,32 @@ button {
   visibility: visible;
   pointer-events: all;
   left: 0;
+}
+.burger-btn__open {
+  background-image: url('../images/burger_menu.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  background-color: transparent;
+  height: 20px;
+  width: 26px;
+  margin-left: 5%;
+  margin-top: 2px;
+  // display: none;
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 1010px;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  &__inner {}
+&__navigation {}
+&__nav_list {
+  display: flex;
+}
+&__nav_items {}
 }
