@@ -1,6 +1,7 @@
 npm i
 (npm audit fix)
-npm i -D webpack-dev-server
+(npm i -D webpack-dev-server)
+npm install --save-dev webpack-dev-server
 (npm add -D html-webpack-plugin)
 npm i -D html-loader html-webpack-plugin
 npm install -g sass

@@ -1,51 +1,37 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-let mode = 'development';
-let target = 'web';
-if (process.env.NODE_ENV === 'production') {
-  mode = 'production';
-  target = 'browserslist';
-}
-
-const plugins = [
-  new MiniCssExtractPlugin({
-    filename: '[name].[contenthash].css',
-  }),
-  new HtmlWebpackPlugin({
-    template: './src/index.html',
-  }),
-];
-
-if (process.env.SERVE) {
-  plugins.push(new ReactRefreshWebpackPlugin());
-}
-
-module.exports = {
-  mode,
-  target,
-  plugins,
-  devtool: 'source-map',
+module.exports = { 
+  mode: 'development',
   entry: './src/index.js',
-  // devServer: {
-  //   static: './dist',
-  //   hot: true,
-  // },
+  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
     },
-    compress: true,
-    port: 9000,
-  },
+    // compress: true,
+    // port: 9000,
+    // hot: true,
+  }, 
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      title: 'Development',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+    }),
+  ],
   output: {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'assets/[hash][ext][query]',
+    // path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-
+  optimization: {
+    runtimeChunk: 'single',
+  },
   module: {
     rules: [
       { test: /\.(html)$/, use: ['html-loader'] },
@@ -60,21 +46,11 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp|ico)$/i,
-        type: mode === 'production' ? 'asset' : 'asset/resource',
+        type:'asset/resource',
       },
       {
         test: /\.(woff2?|eot|ttf|otf)$/i,
         type: 'asset/resource',
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            cacheDirectory: true,
-          },
-        },
       },
     ],
   },
