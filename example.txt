@@ -1,4 +1,5 @@
 npm i
+npm install nodemodule --save
 (npm audit fix)
 (npm i -D webpack-dev-server)
 npm install --save-dev webpack-dev-server
